@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather Api Practice</title>
+</head>
+<body>
+<!-- Elements in the html - ajax data dumped into them -->
+<div class ="city"></div>
+<div class ="wind"></div>
+<div class ="humidity"></div>
+<div class ="temp"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  
+//Get an Api key from the site (this is Open Weather Map.org)
+//Username plspecter - email plspecter@gmail.com
+
+var apiKey = "186515b5cfc411d9931a70f258343299";
+
+//Use Ajax to grab the database
+
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+      "q=Philadelphia,Philadelphia&units=imperial&appid=" + apiKey;
+      //This specifically targets Philadelphia
+
+//AJAX will call the open weather map api
+
+$.ajax({
+    url: queryURL,
+       method: "GET"
+}) .then(function(response) {
+    //All retrieved data is in response
+    //log the info
+    console.log(queryURL);
+    console.log(response);
+
+    //Go into the console and find each dom node and concadinate it with strings
+    //Attached to html elements - targeted with $
+    $(".city").html("<h1>" + response.name + " Weather details</h1>");
+    $(".wind").text("Wind Speed: " + response.wind.speed);
+    $(".humidity").text("Humidity: " + response.main.humidity);
+    $(".temp").text("Temperature (F): " + response.main.temp);
+
+
+
+});
+  
+  
+  
+  
+  
+  </script>
+
+
+    
+</body>
+</html>
